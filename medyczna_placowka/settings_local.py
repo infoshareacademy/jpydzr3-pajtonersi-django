@@ -1,4 +1,4 @@
-from decouple import config
+from medyczna_placowka.settings import *
 
 DEBUG = True
 
