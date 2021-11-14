@@ -1,13 +1,17 @@
-from django.db import models
+from django.contrib.auth import get_user_model
+from django.utils.translation import ugettext as _
+
+USER = get_user_model()
 
 
-class Receptionist(models.Model):
+class Receptionist(USER):
+    class Meta:
+        verbose_name = _('recepcjonista')
+
+
+class Patient(USER):
     pass
 
 
-class Patient(models.Model):
-    pass
-
-
-class Doctor(models.Model):
+class Doctor(USER):
     pass
