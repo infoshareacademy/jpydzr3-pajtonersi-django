@@ -41,6 +41,6 @@ jobs:
         DB_PASSWORD: default_db_password
         DB_HOST: default_host
         DB_PORT: 1111
-        SETTINGS_PATH: settings
+        SETTINGS_PATH: medyczna_placowka.settings_local
       run: |
         python manage.py test
