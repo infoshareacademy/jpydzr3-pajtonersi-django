@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+Zaloguj się:
+
+<form method="POST">{% csrf_token %}
+
+<!-- form variable -->
+ {{ form.as_p }}
+
+  <input type="submit" value="Zaloguj się">
+</form>
+{% endblock %}
+
