@@ -8,7 +8,7 @@ from decouple import config
 def main():
     """Run administrative tasks."""
     # TODO Create loop for different scenarios (prod, dev, local)
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', config('SETTINGS_PATH', default='medyczna_placowka.settings'))
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', config('SETTINGS_PATH'))
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
