@@ -33,14 +33,14 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with django
       env:
-        DEBUG=True
-        TEMPLATE_DEBUG=True
-        SECRET_KEY=default_secret_key
-        DB_NAME=default_db_name
-        DB_USER=default_db_user
-        DB_PASSWORD=default_db_password
-        DB_HOST=default_host
-        DB_PORT=1111
-        SETTINGS_PATH=settings
+        DEBUG: True
+        TEMPLATE_DEBUG: True
+        SECRET_KEY: default_secret_key
+        DB_NAME: default_db_name
+        DB_USER: default_db_user
+        DB_PASSWORD: default_db_password
+        DB_HOST: default_host
+        DB_PORT: 1111
+        SETTINGS_PATH: settings
       run: |
         python manage.py test
