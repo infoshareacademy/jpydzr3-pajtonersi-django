@@ -19,9 +19,10 @@ from django.contrib.auth.views import LoginView
 from users import views
 from django.urls import path, include
 
-from users.views import Login, login_success
+from users.views import Login, login_success, PatientCreateView
 
 urlpatterns = [
     path('login/', Login.as_view(), name='login'),
     path('login_success/', login_success, name='login_success'),
+    path('create_new_patient/', PatientCreateView.as_view(), name='patient_create')
 ]
