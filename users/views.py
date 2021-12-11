@@ -1,7 +1,9 @@
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
+from users.models import Patient
 
 
 class Login(LoginView):
@@ -14,3 +16,8 @@ class Login(LoginView):
 def login_success(request):
     return render(request, "users/login_success.html", {})
 
+
+class PatientCreateView(CreateView):
+    model = Patient
+    fields = '__all__'
+    template_name = 'patient_create.html'
