@@ -20,4 +20,4 @@ def login_success(request):
 class PatientCreateView(CreateView):
     model = Patient
     fields = '__all__'
-    template_name = 'patient_create.html'
+    template_name = 'users/patient_create.html'
