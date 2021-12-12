@@ -28,3 +28,4 @@ class PatientCreateView(CreateView):
         'username',
     ]
     template_name = 'users/patient_create.html'
+    success_url = reverse_lazy('login')
