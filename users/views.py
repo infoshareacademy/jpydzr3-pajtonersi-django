@@ -19,5 +19,12 @@ def login_success(request):
 
 class PatientCreateView(CreateView):
     model = Patient
-    fields = '__all__'
+    fields = [
+        'first_name',
+        'last_name',
+        'pesel',
+        'tel_no',
+        'password',
+        'username',
+    ]
     template_name = 'users/patient_create.html'
