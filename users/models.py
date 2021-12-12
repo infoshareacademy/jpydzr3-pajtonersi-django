@@ -6,8 +6,8 @@ User = get_user_model()
 
 
 class PersonalInfoMixin(models.Model):
-    pesel = models.IntegerField(max_length=11)
-    tel_no = models.CharField(max_length=20)
+    pesel = models.CharField(max_length=20, blank=True, null=True)
+    tel_no = models.CharField(max_length=20, blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -22,16 +22,16 @@ class Address(models.Model):
 
 
 class Receptionist(User, PersonalInfoMixin):
-    address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, blank=True, null=True)
 
     class Meta:
         verbose_name = _('recepcjonista')
 
 
-class Patient(User):
-    address = models.ForeignKey(Address, on_delete=models.CASCADE)
+class Patient(User, PersonalInfoMixin):
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, blank=True, null=True)
 
 
-class Doctor(User):
+class Doctor(User, PersonalInfoMixin):
     specialty = models.CharField(max_length=255)
-    address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, blank=True, null=True)
