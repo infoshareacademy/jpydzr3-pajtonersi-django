@@ -28,11 +28,11 @@ class Receptionist(User, PersonalInfoMixin):
         verbose_name = _('recepcjonista')
 
 
-class Patient(User):
+class Patient(User, PersonalInfoMixin):
     address = models.ForeignKey(Address, on_delete=models.CASCADE, blank=True, null=True)
 
 
-class Doctor(User):
+class Doctor(User, PersonalInfoMixin):
     SPECIALTY_CHOICES = (
         ('PD', 'Pediata'),
         ('DN', 'Dentysta'),
