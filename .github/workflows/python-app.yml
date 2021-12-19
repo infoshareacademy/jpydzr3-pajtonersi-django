@@ -10,9 +10,21 @@ on:
     branches: [ feature-PAJ-*]
 
 jobs:
-  build:
+  container-job:
 
     runs-on: ubuntu-latest
+    container: node:10.18-jessie
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: default_db_password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     - uses: actions/checkout@v2
@@ -31,6 +43,9 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Connect to PostgreSQL
+        run: node client.js
+
     - name: Test with django
       env:
         DEBUG: True
@@ -40,7 +55,7 @@ jobs:
         DB_USER: default_db_user
         DB_PASSWORD: default_db_password
         DB_HOST: default_host
-        DB_PORT: 1111
+        DB_PORT: 5432
         SETTINGS_PATH: medyczna_placowka.settings_local
       run: |
         python manage.py test
