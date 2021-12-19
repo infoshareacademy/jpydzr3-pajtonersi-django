@@ -45,7 +45,7 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_HOST: localhost
+          DB_HOST: postgres
           DB_PORT: ${{ secrets.DB_PORT }}
           SETTINGS_PATH: ${{ secrets.SETTINGS_PATH }}
         run: |
