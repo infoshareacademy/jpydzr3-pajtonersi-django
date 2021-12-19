@@ -22,6 +22,8 @@ jobs:
         image: postgres
         env:
           POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          POSTGRES_DATABASE: ${{ secrets.DB_NAME }}
+          POSTGRES_USER: ${{ secrets.DB_USER }}
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -47,7 +49,6 @@ jobs:
           DB_PORT: ${{ secrets.DB_PORT }}
           SETTINGS_PATH: ${{ secrets.SETTINGS_PATH }}
         run: |
-          python manage.py sqlcreate --database ${{ secrets.DB_NAME }} | psql -U ${{ secrets.DB_USER }} -W
           python manage.py runserver
 
       - name: Test with django
