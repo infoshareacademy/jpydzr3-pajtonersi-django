@@ -45,6 +45,7 @@ jobs:
           DB_PORT: ${{ secrets.DB_PORT }}
           SETTINGS_PATH: ${{ secrets.SETTINGS_PATH }}
         run: |
+          python manage.py sqlcreate –database=${{ secrets.DB_NAME }}
           python manage.py runserver
 
       - name: Test with django
