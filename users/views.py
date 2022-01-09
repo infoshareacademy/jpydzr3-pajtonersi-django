@@ -20,10 +20,11 @@ def login_success(request):
 
 class ProfileDetailView(DetailView):
     model = Profile
-    template_name = 'profile.html'
-    slug_url_kwarg = 'username'
-    slug_field = 'username'
+    template_name = 'users/profile.html'
+    slug_url_kwarg = 'user__username'
+    slug_field = 'user__username'
 
-
-
-
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset=queryset)
+        print(obj)
+        return obj

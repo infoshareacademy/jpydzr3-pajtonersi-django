@@ -26,5 +26,5 @@ from users.views import Login, login_success, ProfileDetailView
 urlpatterns = [
     path('login/', Login.as_view(), name='login'),
     path('login_success/', login_success, name='login_success'),
-    path('profile/<slug:username>/', ProfileDetailView.as_view(), name='profile'),
+    path('profile/<slug:user__username>/', ProfileDetailView.as_view(), name='profile'),
 ]

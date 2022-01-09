@@ -26,7 +26,7 @@ class Profile(models.Model):
     phone = models.CharField('numer telefonu', max_length=50)
 
     def __init__(self, *args, **kwargs):
-        super().__init__(args, kwargs)
+        super().__init__(*args, **kwargs)
         self.username = None
 
     def __str__(self):
@@ -35,6 +35,8 @@ class Profile(models.Model):
     def save(self, *args, **kwargs):
         self.slug = self.user.username
         super(Profile, self).save(*args, **kwargs)
+
+
 
 
 
