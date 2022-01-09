@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block head %}
+<title>Profile</title>
+{%  endblock %}
+
+{% block content %}
+<h1>Profile</h1>
+    dzien dobry
+<img src="/{{ object.avatar }}"/>
+<p>Username: {{ object.user.username }}</p>
+<p>First name: {{ object.user.first_name }}</p>
+<p>Last_name: {{ object.user.last_name }}</p>
+<p>Email: {{ object.user.email }}</p>
+{% endblock %}
