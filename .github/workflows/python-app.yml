@@ -1,56 +1,56 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
-
-name: Python application
-
-on:
-  push:
-    branches: [ feature-PAJ-* ]
-  pull_request:
-    branches: [ feature-PAJ-* ]
-
-jobs:
-  container-job:
-
-    runs-on: ubuntu-latest
-    container: python:3.10.1-bullseye
-    environment:
-      name: env
-
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          POSTGRES_DATABASE: ${{ secrets.DB_NAME }}
-          POSTGRES_USER: ${{ secrets.DB_USER }}
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: |
-          if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
-      - name: Connect to PostgreSQL
-        env:
-          DEBUG: ${{ secrets.DEBUG }}
-          TEMPLATE_DEBUG: ${{ secrets.TEMPLATE_DEBUG }}
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_HOST: postgres
-          DB_PORT: ${{ secrets.DB_PORT }}
-          SETTINGS_PATH: ${{ secrets.SETTINGS_PATH }}
-        run: |
-          python manage.py runserver
-
-      - name: Test with django
-        run: |
-          python manage.py test
+## This workflow will install Python dependencies, run tests and lint with a single version of Python
+## For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+#
+#name: Python application
+#
+#on:
+#  push:
+#    branches: [ feature-PAJ-* ]
+#  pull_request:
+#    branches: [ feature-PAJ-* ]
+#
+#jobs:
+#  container-job:
+#
+#    runs-on: ubuntu-latest
+#    container: python:3.10.1-bullseye
+#    environment:
+#      name: env
+#
+#    services:
+#      postgres:
+#        image: postgres
+#        env:
+#          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+#          POSTGRES_DATABASE: ${{ secrets.DB_NAME }}
+#          POSTGRES_USER: ${{ secrets.DB_USER }}
+#        options: >-
+#          --health-cmd pg_isready
+#          --health-interval 10s
+#          --health-timeout 5s
+#          --health-retries 5
+#        ports:
+#          - 5432:5432
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Install dependencies
+#        run: |
+#          if [ -f requirements.txt ]; then python -m pip install -r requirements.txt; fi
+#      - name: Connect to PostgreSQL
+#        env:
+#          DEBUG: ${{ secrets.DEBUG }}
+#          TEMPLATE_DEBUG: ${{ secrets.TEMPLATE_DEBUG }}
+#          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+#          DB_NAME: ${{ secrets.DB_NAME }}
+#          DB_USER: ${{ secrets.DB_USER }}
+#          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+#          DB_HOST: postgres
+#          DB_PORT: ${{ secrets.DB_PORT }}
+#          SETTINGS_PATH: ${{ secrets.SETTINGS_PATH }}
+#        run: |
+#          python manage.py runserver
+#
+#      - name: Test with django
+#        run: |
+#          python manage.py test
