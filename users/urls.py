@@ -26,7 +26,7 @@ from users.views import Login, login_success, PatientCreateView, ProfileDetailVi
 urlpatterns = [
     path('login/', Login.as_view(), name='login'),
     path('login_success/', login_success, name='login_success'),
-    path('create_new_patient/', PatientCreateView.as_view(), name='patient_create')
+    path('create_new_patient/', PatientCreateView.as_view(), name='patient_create'),
     path('profile/<slug:user__username>/', ProfileDetailView.as_view(), name='profile'),
     path('profile/<slug:user__username>/profile_edycja.html', ProfileUpdateView.as_view(), name='profile_edycja'),
 ]

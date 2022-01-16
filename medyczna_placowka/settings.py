@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'users',
     'django_extensions',
+    'med_doc',
 ]
 
 MIDDLEWARE = [
