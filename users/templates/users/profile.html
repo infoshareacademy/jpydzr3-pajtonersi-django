@@ -1,17 +1,98 @@
 {% extends "base.html" %}
 {% load static %}
-
-
 {% block head %}
-<title>Profile</title>
-{%  endblock %}
+    <title>Profile</title>
+{% endblock %}
 
 {% block content %}
-<h1>Profile</h1>
-    dzien dobry
-<img src="/{{ object.avatar }}"/>
-<p>Username: {{ object.user.username }}</p>
-<p>First name: {{ object.user.first_name }}</p>
-<p>Last_name: {{ object.user.last_name }}</p>
-<p>Email: {{ object.user.email }}</p>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Strona główna</a>
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile_edycja.html">Twoje dane</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Skierowania</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Recepty</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Zwolnienia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Wizyty</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+
+    <h1 class="text-primary text-center p-5">Witaj w naszej placówce medycznej</h1>
+
+    <div class="container overflow-hidden">
+    <div class="row g-5">
+        <div class="col-4 bg-light">
+            <div class="container m-3 p-3">
+                <h1 class="text-dark">Twój profil</h1>
+                <img src="/{{ object.avatar }}"/>
+            </div>
+        </div>
+
+        <div class="col-1"></div>
+
+        <div class="col-4 bg-light">
+            <div class="container m-3 p-3">
+                <h2 class="text-dark">{{ object.user.first_name }} {{ object.user.last_name }}</h2>
+                <p class="text-dark">Nazwa użytkownika: {{ object.user.username }}</p>
+                <p class="text-dark">Imię: {{ object.user.first_name }}</p>
+                <p class="text-dark">Nazwisko: {{ object.user.last_name }}</p>
+                <p class="text-dark">Email: {{ object.user.email }}</p>
+                <p class="text-dark">Numer telefonu: {{ object.phone }}</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container bg-dark my-5 pb-5">
+        <div class="container-fluid py-5 text-center">
+            <h1 class="text-light">Skorzystaj z naszych usług</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-8">
+                <span class="placeholder col-12 text-center"
+                      style="min-height: 10vh">
+                    <div class="row">
+                        <div class="col-4">
+                            <button type="button" class="btn btn-success btn-lg">Umów się na wizytę</button>
+                        </div>
+                        <div class="col-4">
+                            <button type="button" class="btn btn-success btn-lg">Odnów receptę</button>
+                        </div>
+                        <div class="col-4">
+                            <button type="button" class="btn btn-success btn-lg">Poproś o skierowanie</button>
+                        </div>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}

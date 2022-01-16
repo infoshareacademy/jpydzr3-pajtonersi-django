@@ -20,11 +20,12 @@ from django.contrib.auth.views import LoginView
 
 from users import views
 from django.urls import path, include
+from users.views import Login, login_success, ProfileDetailView, ProfileUpdateView
 
-from users.views import Login, login_success, ProfileDetailView
 
 urlpatterns = [
     path('login/', Login.as_view(), name='login'),
     path('login_success/', login_success, name='login_success'),
     path('profile/<slug:user__username>/', ProfileDetailView.as_view(), name='profile'),
+    path('profile/<slug:user__username>/profile_edycja.html', ProfileUpdateView.as_view(), name='profile_edycja'),
 ]
