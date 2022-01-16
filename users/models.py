@@ -34,11 +34,4 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = self.user.username
-        super(Profile, self).save(*args, **kwargs)
-
-
-
-
-
-
-
+        super().save(*args, **kwargs)
