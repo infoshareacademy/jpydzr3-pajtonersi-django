@@ -20,8 +20,8 @@ from django.contrib.auth.views import LoginView
 
 from users import views
 from django.urls import path, include
-
 from users.views import Login, login_success, ProfileDetailView, ProfileUpdateView
+
 
 urlpatterns = [
     path('login/', Login.as_view(), name='login'),
