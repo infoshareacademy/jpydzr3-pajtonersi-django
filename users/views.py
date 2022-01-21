@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView
 
-from users.models import Patient
+from users.models import Patient, Doctor
 
 from users.models import Profile
 
@@ -29,6 +29,21 @@ class PatientCreateView(CreateView):
         'tel_no',
         'password',
         'username',
+    ]
+    template_name = 'users/patient_create.html'
+    success_url = reverse_lazy('login')
+
+
+class DoctorCreateView(CreateView):
+    model = Doctor
+    fields = [
+        'first_name',
+        'last_name',
+        'pesel',
+        'tel_no',
+        'password',
+        'username',
+        'specialty',
     ]
     template_name = 'users/patient_create.html'
     success_url = reverse_lazy('login')
