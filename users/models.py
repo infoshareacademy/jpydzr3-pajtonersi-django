@@ -33,6 +33,9 @@ class Receptionist(User, PersonalInfoMixin):
 class Patient(User, PersonalInfoMixin):
     address = models.ForeignKey(Address, on_delete=models.CASCADE, blank=True, null=True)
 
+    class Meta:
+        verbose_name = _("pacjent")
+        verbose_name_plural = _("pacjenci")
 
 class Doctor(User, PersonalInfoMixin):
     SPECIALTY_CHOICES = (
@@ -47,7 +50,7 @@ class Doctor(User, PersonalInfoMixin):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
-    phone = models.CharField('numer telefonu', max_length=50)
+    phone = models.CharField('numer telefonu', max_length=50, null=True, blank=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -33,6 +33,14 @@ class PatientCreateView(CreateView):
     template_name = 'users/patient_create.html'
     success_url = reverse_lazy('login')
 
+    def form_valid(self, form):
+        """If the form is valid, save the associated model."""
+        self.object = form.save()
+        profile = Profile.objects.create(
+            user=self.object
+        )
+        return super().form_valid(form)
+
 
 class DoctorCreateView(CreateView):
     model = Doctor
