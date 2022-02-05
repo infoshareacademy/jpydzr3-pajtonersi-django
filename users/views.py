@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, get_object_or_404
-from django.urls import reverse_lazy
+from django.shortcuts import redirect, render, get_object_or_404
+from django.urls import reverse_lazy, reverse
 from django.views.generic import DetailView, UpdateView
 
 
@@ -10,12 +10,9 @@ from users.models import Profile
 
 class Login(LoginView):
     template_name = 'users/login.html'
-
+    
     def get_success_url(self) -> str:
-        return reverse_lazy('profile/<slug:user__username>/')
-        url = self.get_redirect_url()
-        return url or reverse('profile',
-                              kwargs={'slug:user__username': self.request.user.slug, 'name': self.request.user.username})
+        return reverse('profile', kwargs={'user__username': self.request.user.username})
 
 
 def login_success(request):
