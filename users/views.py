@@ -1,11 +1,9 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import render
+from django.views.generic import DetailView, UpdateView, CreateView
 from django.urls import reverse_lazy, reverse
-from django.views.generic import DetailView, UpdateView
 
-
-from users.models import Profile
+from users.models import Patient, Doctor, Profile
 
 
 class Login(LoginView):
@@ -18,7 +16,44 @@ class Login(LoginView):
 def login_success(request):
     return render(request, "users/login_success.html", {})
 
+  
+class PatientCreateView(CreateView):
+    model = Patient
+    fields = [
+        'first_name',
+        'last_name',
+        'pesel',
+        'tel_no',
+        'password',
+        'username',
+    ]
+    template_name = 'users/patient_create.html'
+    success_url = reverse_lazy('login')
 
+    def form_valid(self, form):
+        """If the form is valid, save the associated model."""
+        self.object = form.save()
+        profile = Profile.objects.create(
+            user=self.object
+        )
+        return super().form_valid(form)
+
+
+class DoctorCreateView(CreateView):
+    model = Doctor
+    fields = [
+        'first_name',
+        'last_name',
+        'pesel',
+        'tel_no',
+        'password',
+        'username',
+        'specialty',
+    ]
+    template_name = 'users/patient_create.html'
+    success_url = reverse_lazy('login')
+
+    
 class ProfileDetailView(DetailView):
     model = Profile
     template_name = 'users/profile.html'

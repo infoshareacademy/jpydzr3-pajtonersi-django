@@ -7,5 +7,5 @@ from med_doc.views import create_visit
 
 
 urlpatterns = [
-    path('create_visit', create_visit, name='create_visit')
+    path('create_visit/', create_visit, name='create_visit')
 ]

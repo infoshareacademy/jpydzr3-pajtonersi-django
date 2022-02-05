@@ -20,12 +20,14 @@ from django.contrib.auth.views import LoginView
 
 from users import views
 from django.urls import path, include
-from users.views import Login, login_success, ProfileDetailView, ProfileUpdateView
-
+from users.views import Login, login_success, PatientCreateView, ProfileDetailView, \
+    ProfileUpdateView, DoctorCreateView
 
 urlpatterns = [
     path('login/', Login.as_view(), name='login'),
     path('login_success/', login_success, name='login_success'),
+    path('create_new_patient/', PatientCreateView.as_view(), name='patient_create'),
+    path('create_new_doctor/', DoctorCreateView.as_view(), name='doctor_create'),
     path('profile/<slug:user__username>/', ProfileDetailView.as_view(), name='profile'),
     path('profile/<slug:user__username>/profile_edycja.html', ProfileUpdateView.as_view(), name='profile_edycja'),
 ]
