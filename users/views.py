@@ -53,8 +53,17 @@ class DoctorCreateView(CreateView):
         'username',
         'specialty',
     ]
-    template_name = 'users/patient_create.html'
+    template_name = 'users/doctor_create.html'
     success_url = reverse_lazy('login')
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.set_password(form.cleaned_data['password'])
+        self.object.save()
+        Profile.objects.create(
+            user=self.object
+        ).save()
+        return HttpResponseRedirect(self.get_success_url())
 
     
 class ProfileDetailView(DetailView):
