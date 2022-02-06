@@ -1,4 +1,5 @@
 from django.contrib.auth.views import LoginView
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import DetailView, UpdateView, CreateView
 from django.urls import reverse_lazy, reverse
@@ -11,7 +12,6 @@ class Login(LoginView):
     
     def get_success_url(self) -> str:
         return reverse('profile', kwargs={'user__username': self.request.user.username})
-
 
 def login_success(request):
     return render(request, "users/login_success.html", {})
@@ -33,10 +33,13 @@ class PatientCreateView(CreateView):
     def form_valid(self, form):
         """If the form is valid, save the associated model."""
         self.object = form.save()
+        self.object.set_password(form.cleaned_data['password'])
+        self.object.save()
         profile = Profile.objects.create(
             user=self.object
         )
-        return super().form_valid(form)
+        profile.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class DoctorCreateView(CreateView):
