@@ -26,9 +26,15 @@ class UserCreateTestCase(TestCase):
         patient_query = Patient.objects.filter(first_name=parameters['first_name'])
         profile_query = Profile.objects.filter(user__username=parameters['username'])
         self.assertEqual(patient_query.count(), 1)
-        # self.assertEqual(profile_query.count(), 1)
         assert profile_query.count() == 1
         self.assertEqual(HTTPStatus.FOUND, response.status_code)
+
+        logged_in = self.client.login(username=parameters['username'], password=parameters['password'])
+        self.assertTrue(logged_in)
+
+        logged_in = self.client.login(username=parameters['username'], password='zle_haslo')
+        self.assertFalse(logged_in)
+
 
     def test_database_save_no_data(self):
         parameters = {
@@ -56,6 +62,12 @@ class UserCreateTestCase(TestCase):
         self.assertEqual(doctor_query.count(), 1)
         self.assertEqual(HTTPStatus.FOUND, response.status_code)
 
+        logged_in = self.client.login(username=parameters['username'], password=parameters['password'])
+        self.assertTrue(logged_in)
+
+        logged_in = self.client.login(username=parameters['username'], password='zle_haslo')
+        self.assertFalse(logged_in)
+
     def test_create_doctor_no_data(self):
         parameters = {}
 
@@ -63,3 +75,4 @@ class UserCreateTestCase(TestCase):
         doctor_query = Doctor.objects.all()
         self.assertEqual(doctor_query.count(), 0)
         self.assertEqual(HTTPStatus.OK, response.status_code)
+

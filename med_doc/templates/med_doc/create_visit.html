@@ -1,8 +1,20 @@
 {%  extends "base.html" %}
 {%  block content %}
     <form method="POST">
-        {% csrf_token %}
+        {% csrf_token %}         
         {{ form.as_p }}
         <input type="submit" value="Zatwierdź">
     </form>
 {%  endblock %}
+
+{% block extra_css %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js" integrity="sha256-VBLiveTKyUZMEzJd6z2mhfxIqz3ZATCuVMawPZGzIfA=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js" integrity="sha256-z0oKYg6xiLq3yJGsp/LsY9XykbweQlHl42jHv2XTBz4=" crossorigin="anonymous"></script>
+{% endblock %}
+
+<script>
+    $(function () {
+      $("#datetimepicker1").datetimepicker();
+    });
+</script>
