@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 
 from med_doc.forms import VisitForm
+from med_doc.models import Visit
 
 
 def create_visit(request):
@@ -9,7 +10,8 @@ def create_visit(request):
     if request.method == 'POST':
         form = VisitForm(request.POST)
         if form.is_valid():
-            form.save()
+            visit = Visit(**form.cleaned_data)
+            visit.save()
             return render(request, template_name, context={'form': VisitForm()})
         return render(request, template_name, context={'form': VisitForm(request.POST)})
 
